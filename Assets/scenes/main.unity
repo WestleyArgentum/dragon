@@ -174,7 +174,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: .119999997}
   serializedVersion: 2
-  m_Size: {x: .569999993, y: .629999995}
+  m_Size: {x: .479999989, y: .629999995}
 --- !u!58 &828463308
 CircleCollider2D:
   m_ObjectHideFlags: 0
