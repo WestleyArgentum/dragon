@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	public float maxSpeed = 10f;
-	public float jumpForce = 400f;
+	public float jumpForce = 14f;
 
 	[HideInInspector] public bool facingRight = true;
 	[HideInInspector] public bool jump = false;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour {
 		if (jump) {
 			jump = false;
 			animator.SetTrigger("Jump");
-			body.AddForce(new Vector2(0f, jumpForce));
+			body.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
 		}
 	}
 
