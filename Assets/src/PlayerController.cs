@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 
 		animator.SetFloat("speed", Mathf.Abs(move));
 
-		GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+		body.velocity = new Vector2(move * maxSpeed, body.velocity.y);
 
 		if (move > 0 && !facingRight)
 			Flip();
