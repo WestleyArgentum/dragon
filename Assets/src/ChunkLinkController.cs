@@ -8,6 +8,7 @@ public class ChunkLinkController : MonoBehaviour {
 	};
 
 	public linkTypes linkType;
+	public float triggerCreateDistance = 2.0f;
 
 	private Transform player;
 	private Vector3 chunkOffset;
@@ -20,7 +21,7 @@ public class ChunkLinkController : MonoBehaviour {
 	}
 
 	void Update() {
-		if (linked == null && (transform.position - player.position).sqrMagnitude < 2 * 2) {
+		if (linked == null && (transform.position - player.position).sqrMagnitude < triggerCreateDistance * triggerCreateDistance) {
 			GameObject newChunk = (GameObject)Instantiate((Object)Resources.Load("world-chunk-1"), transform.position, Quaternion.identity);
 
 			// find a compatible link
