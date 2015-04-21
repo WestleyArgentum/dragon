@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ChunkDestroyer : MonoBehaviour {
 
-	public float triggerDestroyDistance = 8.0f;
+	public float triggerDestroyDistance = 12.0f;
 
 	private Transform player;
 

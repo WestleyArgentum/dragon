@@ -22,7 +22,7 @@ public class ChunkLinkController : MonoBehaviour {
 
 	void Update() {
 		if (linked == null && (transform.position - player.position).sqrMagnitude < triggerCreateDistance * triggerCreateDistance) {
-			GameObject newChunk = (GameObject)Instantiate((Object)Resources.Load("world-chunk-1"), transform.position, Quaternion.identity);
+			GameObject newChunk = (GameObject)Instantiate((Object)Resources.Load("world-chunk-2"), transform.position, Quaternion.identity);
 
 			// find a compatible link
 			linkTypes lookingForLink = MatchingLinkType();
