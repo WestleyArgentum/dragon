@@ -7,8 +7,12 @@ public class ChunkManager : MonoBehaviour {
 
 	private Transform player;
 
+	private Object[] chunkPool;
+
 	void Awake() {
 		player = GameObject.FindGameObjectWithTag("Player").transform;
+
+		chunkPool = (Object[])Resources.LoadAll("world-chunks");
 	}
 
 	void Update() {
@@ -17,7 +21,11 @@ public class ChunkManager : MonoBehaviour {
 			Vector2 newChunkPos = new Vector2(player.position.x, player.position.y);
 			newChunkPos.y -= distanceBelowToSpawn;
 
-			Instantiate((Object)Resources.Load("world-chunk-1"), newChunkPos, Quaternion.identity);
+			Instantiate(GetRandomChunk(), newChunkPos, Quaternion.identity);
 		}
+	}
+
+	Object GetRandomChunk() {
+		return chunkPool[Random.Range(0, chunkPool.Length)];
 	}
 }
