@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float maxSpeed = 10f;
+	public float maxSpeed = 6f;
 	public float jumpForce = 14f;
 
 	[HideInInspector] public bool facingRight = true;

@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour {
 	public float xMargin = 0f;
 	public float yPositiveMargin = -3f;
 	public float yNegativeMargin = 0.5f;
-	public float xSmooth = 2f;
+	public float xSmooth = 1f;
 	public float ySmooth = 2f;
 	public Vector2 maxXAndY;
 	public Vector2 minXAndY;
@@ -35,7 +35,8 @@ public class CameraController : MonoBehaviour {
 		float targetY = transform.position.y;
 
 		if (CheckXMargin ()) {
-			targetX = Mathf.Lerp(transform.position.x, player.position.x, xSmooth * Time.deltaTime);
+			float smooth = Mathf.Abs(player.position.x - transform.position.x) + xSmooth;
+			targetX = Mathf.Lerp(transform.position.x, player.position.x, smooth * Time.deltaTime);
 		}
 
 		if (CheckYMargin ()) {
