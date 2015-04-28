@@ -11,18 +11,21 @@ public class CameraController : MonoBehaviour {
 	public Vector2 maxXAndY;
 	public Vector2 minXAndY;
 	
-	private Transform player;
+	private Transform playerTransform;
+	private Rigidbody2D playerBody;
 	
 	void Awake() {
-		player = GameObject.FindGameObjectWithTag("Player").transform;
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		playerTransform = player.transform;
+		playerBody = player.GetComponent<Rigidbody2D>();
 	}
 	
 	bool CheckXMargin() {
-		return Mathf.Abs(transform.position.x - player.position.x) > xMargin;
+		return Mathf.Abs(transform.position.x - playerTransform.position.x) > xMargin;
 	}
 	
 	bool CheckYMargin() {
-		float y = transform.position.y - player.position.y;
+		float y = transform.position.y - playerTransform.position.y;
 		return y > yNegativeMargin || y < yPositiveMargin;
 	}
 
@@ -35,12 +38,12 @@ public class CameraController : MonoBehaviour {
 		float targetY = transform.position.y;
 
 		if (CheckXMargin ()) {
-			float smooth = Mathf.Abs(player.position.x - transform.position.x) + xSmooth;
-			targetX = Mathf.Lerp(transform.position.x, player.position.x, smooth * Time.deltaTime);
+			float smooth = Mathf.Abs(playerTransform.position.x - transform.position.x) + xSmooth;
+			targetX = Mathf.Lerp(transform.position.x + (playerBody.velocity.x * 0.02f), playerTransform.position.x, smooth * Time.deltaTime);
 		}
 
 		if (CheckYMargin ()) {
-			targetY = Mathf.Lerp(transform.position.y, player.position.y, ySmooth * Time.deltaTime);
+			targetY = Mathf.Lerp(transform.position.y, playerTransform.position.y, ySmooth * Time.deltaTime);
 		}
 
 		transform.position = new Vector3(targetX, targetY, transform.position.z);
