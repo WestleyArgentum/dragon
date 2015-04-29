@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour {
 
 		if (CheckXMargin ()) {
 			float smooth = Mathf.Abs(playerTransform.position.x - transform.position.x) + xSmooth;
-			targetX = Mathf.Lerp(transform.position.x + (playerBody.velocity.x * 0.02f), playerTransform.position.x, smooth * Time.deltaTime);
+			targetX = Mathf.Lerp(transform.position.x + (playerBody.velocity.x * Time.deltaTime), playerTransform.position.x, smooth * Time.deltaTime);
 		}
 
 		if (CheckYMargin ()) {
