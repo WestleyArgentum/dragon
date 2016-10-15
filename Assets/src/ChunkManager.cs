@@ -21,11 +21,19 @@ public class ChunkManager : MonoBehaviour {
 			Vector2 newChunkPos = new Vector2(player.position.x, player.position.y);
 			newChunkPos.y -= distanceBelowToSpawn;
 
-			Instantiate(GetRandomChunk(), newChunkPos, Quaternion.identity);
+			CreateAndPopulateRandomChunk(newChunkPos);
 		}
 	}
 
-	Object GetRandomChunk() {
+	Object GetRandomChunkTemplate() {
 		return chunkPool[Random.Range(0, chunkPool.Length)];
+	}
+
+	GameObject CreateRandomChunk(Vector2 pos) {
+		return (GameObject)Instantiate(GetRandomChunkTemplate(), pos, Quaternion.identity);
+	}
+
+	public GameObject CreateAndPopulateRandomChunk(Vector2 pos) {
+		return CreateRandomChunk(pos);
 	}
 }

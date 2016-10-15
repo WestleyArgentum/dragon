@@ -11,6 +11,8 @@ public class ChunkLinkController : MonoBehaviour {
 	public float triggerCreateDistance = 2.0f;
 
 	private Transform player;
+	private ChunkManager manager;
+
 	private Object[] chunkPool;
 
 	private Vector3 chunkOffset;
@@ -20,12 +22,12 @@ public class ChunkLinkController : MonoBehaviour {
 		chunkOffset = transform.parent.position - transform.position;
 
 		player = GameObject.FindGameObjectWithTag("Player").transform;
-		chunkPool = (Object[])Resources.LoadAll("world-chunks");
+		manager = GameObject.FindGameObjectWithTag("ChunkManager").GetComponent<ChunkManager>();
 	}
 
 	void Update() {
 		if (linked == null && (transform.position - player.position).sqrMagnitude < triggerCreateDistance * triggerCreateDistance) {
-			GameObject newChunk = (GameObject)Instantiate(GetRandomChunk(), transform.position, Quaternion.identity);
+			GameObject newChunk = manager.CreateAndPopulateRandomChunk(transform.position);
 
 			// find a compatible link
 			linkTypes lookingForLink = MatchingLinkType();
@@ -44,10 +46,6 @@ public class ChunkLinkController : MonoBehaviour {
 		newLink.linked = this;
 
 		newLink.transform.parent.position += newLink.chunkOffset;
-	}
-
-	Object GetRandomChunk() {
-		return chunkPool[Random.Range(0, chunkPool.Length)];
 	}
 
 	linkTypes MatchingLinkType() {
